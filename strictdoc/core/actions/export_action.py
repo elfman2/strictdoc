@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+from strictdoc import STRICTDOC_ROOT_PATH
 from strictdoc.backend.excel.export.excel_generator import ExcelGenerator
 from strictdoc.backend.reqif.reqif_export import ReqIFExport
 from strictdoc.backend.sdoc.errors.document_tree_error import DocumentTreeError
@@ -11,6 +12,7 @@ from strictdoc.core.traceability_index import TraceabilityIndex
 from strictdoc.core.traceability_index_builder import TraceabilityIndexBuilder
 from strictdoc.export.html.html_generator import HTMLGenerator
 from strictdoc.export.rst.document_rst_generator import DocumentRSTGenerator
+from strictdoc.helpers.file_system import copytree
 
 
 class ExportAction:
@@ -52,6 +54,31 @@ class ExportAction:
         if "rst" in self.config.formats:
             output_rst_root = os.path.join(self.config.output_dir, "rst")
             Path(output_rst_root).mkdir(parents=True, exist_ok=True)
+            DocumentRSTGenerator.export_tree(
+                self.traceability_index, output_rst_root
+            )
+
+        if "sphinx" in self.config.formats:
+            output_sphinx_root = os.path.join(
+                self.config.output_dir, "sphinx"
+            )
+            path_to_sphinx_boilerplate = os.path.join(
+                STRICTDOC_ROOT_PATH,
+                "strictdoc/export/rst/sphinx_boilerplate"
+            )
+            copytree(path_to_sphinx_boilerplate, output_sphinx_root)
+
+            output_rst_root = os.path.join(output_sphinx_root, "source")
+
+            input_assets_folder = os.path.join(self.config.input_paths[0], "_assets")
+            if os.path.isdir(input_assets_folder):
+                copytree(
+                    input_assets_folder,
+                    os.path.join(output_rst_root, "_assets")
+                )
+
+            Path(output_rst_root).mkdir(parents=True, exist_ok=True)
+
             DocumentRSTGenerator.export_tree(
                 self.traceability_index, output_rst_root
             )

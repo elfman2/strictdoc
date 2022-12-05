@@ -9,7 +9,7 @@ from strictdoc.cli.argument_int_range import IntRange
 from strictdoc.core.environment import SDocRuntimeEnvironment
 from strictdoc.core.project_config import ProjectConfig
 
-EXPORT_FORMATS = ["html", "html-standalone", "rst", "excel", "reqif-sdoc"]
+EXPORT_FORMATS = ["html", "html-standalone", "rst", "sphinx", "excel", "reqif-sdoc"]
 EXCEL_PARSERS = ["basic"]
 
 
