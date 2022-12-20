@@ -21,6 +21,6 @@ class RSTTemplates:
     )
     # TODO: Check if this line is still needed (might be some older workaround).
     jinja_environment.globals.update(isinstance=isinstance)
-    jinja_environment.trim_blocks = False
-    jinja_environment.lstrip_blocks = False
-    jinja_environment.strip_trailing_newlines = False
+    jinja_environment.trim_blocks = True
+    jinja_environment.lstrip_blocks = True
+    jinja_environment.strip_trailing_newlines = True

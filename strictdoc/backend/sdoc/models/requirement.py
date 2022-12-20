@@ -265,6 +265,7 @@ class Requirement(Node):  # pylint: disable=too-many-instance-attributes
         self, skip_single_lines=False, skip_multi_lines=False
     ):
         for field in self.fields:
+            print(f"WTF: {field}")
             if field.field_name in RESERVED_NON_META_FIELDS:
                 continue
             meta_field_value = (

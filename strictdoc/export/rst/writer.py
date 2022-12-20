@@ -93,6 +93,7 @@ class RSTWriter:
             index=self.index,
             _print_rst_header=self._print_rst_header_2,
         )
+
         return output
 
     def _print_requirement_fields_unused(self, section_content: Requirement):
