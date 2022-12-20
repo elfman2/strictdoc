@@ -10,21 +10,23 @@
 .. list-table::
     :align: left
     :header-rows: 0
-    {% for meta_field in requirement.enumerate_meta_fields(skip_multi_lines=True) %}
+    {# load-bearing comment: emits one blank line #}
+    {%- for meta_field in requirement.enumerate_meta_fields(skip_multi_lines=True) %}
     * - **{{meta_field[0]}}:**
       - {{ meta_field[1] }}
-    {% endfor %}
-
+    {%- endfor -%}
 {%- endif %}
+{# load-bearing comment: emits a blank line #}
+
 {%- if requirement.statement is not none %}
 {{requirement.statement}}
 {% elif requirement.statement_multiline is not none %}
 {{requirement.statement_multiline}}
 {% endif %}
 
-{%- if requirement.rationale or requirement.rationale_multiline -%}
-    **Rationale:** {{ renderer.render_requirement_rationale(requirement) }}
-{%- endif -%}
+{%- if requirement.rationale or requirement.rationale_multiline %}
+**Rationale:** {{ requirement.get_rationale_single_or_multiline() }}
+{% endif %}
 
 {%- for comment in requirement.comments %}
 **Comment:** {{comment.get_comment()}}
@@ -33,8 +35,7 @@
 {%- if requirement.has_meta %}
   {%- for meta_field in requirement.enumerate_meta_fields(skip_single_lines=True) %}
 **{{meta_field[0]}}:**
-{{ renderer.render_meta_value(meta_field[1]) }}
-
+{{ meta_field[1] }}
   {%- endfor %}
 {%- endif %}
 

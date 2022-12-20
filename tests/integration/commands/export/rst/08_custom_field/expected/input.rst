@@ -6,11 +6,26 @@
 
     * - **UID:**
       - A-1
-
-    * - **META_TEST:**
-      - Yes
+    * - **TAGS:**
+      - has_comment, has_rationale
+    * - **CRITICALITY:**
+      - High
 
 
 the foo must bar
 
-**Comment:** Comment
+**Rationale:** If the foo did not bar then it might instead baz, which must be avoided at all costs.
+
+**Comment:** A bazzing foo is dangerous because of the uncontrolled range of interaction of the baz with other foos.
+
+**PUB_REFS:**
+References
+
+1
+
+2
+
+**VERIFICATION:**
+Very detailed verification step;
+
+With multiple paragraphs
