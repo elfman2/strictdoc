@@ -10,13 +10,13 @@
 .. list-table::
     :align: left
     :header-rows: 0
-    {# load-bearing comment: emits one blank line #}
+{% if true -%}{# without this workaround Jinja eats too much or not enough whitespace. #}{%- endif %}
     {%- for meta_field in requirement.enumerate_meta_fields(skip_multi_lines=True) %}
     * - **{{meta_field[0]}}:**
       - {{ meta_field[1] }}
     {%- endfor -%}
 {%- endif %}
-{# load-bearing comment: emits a blank line #}
+{% if true -%}{# without this workaround Jinja eats too much or not enough whitespace. #}{%- endif %}
 
 {%- if requirement.statement is not none %}
 {{requirement.statement}}
