@@ -22,5 +22,7 @@ class PassthroughAction:
 
         writer = SDWriter()
         output = writer.write(document)
-        with open(config.output_file, "w", encoding="utf8") as file:
+        with open(
+            config.output_file or config.input_file, "w", encoding="utf8"
+        ) as file:
             file.write(output)

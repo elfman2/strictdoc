@@ -1,5 +1,7 @@
 from enum import Enum
 
+from rstfmt import rstfmt
+
 from strictdoc.backend.sdoc.models.document import Document
 from strictdoc.backend.sdoc.models.document_config import DocumentConfig
 from strictdoc.backend.sdoc.models.inline_link import InlineLink
@@ -190,7 +192,10 @@ class SDWriter:
                     output += "\n"
                     if len(field.field_value_multiline) > 0:
                         if field.field_value_multiline != "\n":
-                            output += field.field_value_multiline
+                            doc = rstfmt.parse_string(
+                                field.field_value_multiline
+                            )
+                            output += rstfmt.format_node(80, doc)
                         output += "\n"
                     output += "<<<"
                     output += "\n"
@@ -316,4 +321,5 @@ class SDWriter:
                 output += "]"
             else:
                 raise NotImplementedError
-        return output
+        doc = rstfmt.parse_string(output)
+        return rstfmt.format_node(80, doc)
