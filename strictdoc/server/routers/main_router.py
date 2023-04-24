@@ -2115,8 +2115,9 @@ def create_main_router(
         return HTMLResponse(content=content)
 
     def get_asset(url_to_asset: str):
-        static_path = environment.get_path_to_export_html()
+        static_path = export_config.output_html_root
         static_file = os.path.join(static_path, url_to_asset)
+        assert 0, f"{static_path}, {static_file}"
         content_type, _ = guess_type(static_file)
 
         if not os.path.isfile(static_file):
